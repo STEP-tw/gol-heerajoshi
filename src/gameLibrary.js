@@ -53,6 +53,7 @@ const isNeighbourAlive = function(grid){
 
 
 const updateGridPosition = function(gridArray){
+  let updatedGrid = gridArray.map(x=> x.slice());
   let length = gridArray.length;
   let breadth = gridArray[0].length;
   for(let row=0; row< length; row++){
@@ -64,13 +65,13 @@ const updateGridPosition = function(gridArray){
       let aliveNeighbours = validNeighbours.filter(isAlive).length;
     
       if(aliveNeighbours == 3)
-        gridArray[row][column] =1;
+        updatedGrid[row][column] =1;
 
       if(aliveNeighbours <2 || aliveNeighbours >3)
-        gridArray[row][column]=0;
+        updatedGrid[row][column]=0;
     }
   }
-return gridArray;
+return updatedGrid;
 }
 
 

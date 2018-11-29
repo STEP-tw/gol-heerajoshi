@@ -1,4 +1,4 @@
-const  { createGrid,initialGrid, updateGridPosition, findNeighbours, isValidNeighbour,  startGame } = require('./gameLibrary.js');
+const  { createGrid, initialGrid, updateGridPosition, findNeighbours, isValidNeighbour, startGame } = require('./gameLibrary.js');
 
 const nextGeneration = function(currGeneration,bounds) {
   let { topLeft,bottomRight } = bounds;
@@ -6,14 +6,13 @@ const nextGeneration = function(currGeneration,bounds) {
   let breadth = bottomRight[1] - topLeft[1] + 1;
   let grid = createGrid(length,breadth);
 
-  grid=  initialGrid(grid, currGeneration);
-
-  grid =updateGridPosition(grid);
+  grid =  initialGrid(grid, currGeneration);
+  grid = updateGridPosition(grid);
 
   let aliveGeneration=[];
-  for(let row=0; row< length; row++){
-    for(let column = 0; column<breadth; column++){
-      grid[row][column]==1 && aliveGeneration.push([row,column]) ;
+  for(let row = 0; row < length; row++){
+    for(let column = 0; column < breadth; column++){
+      grid[row][column] == 1 && aliveGeneration.push([row,column]);
     }
   }
   return aliveGeneration;
