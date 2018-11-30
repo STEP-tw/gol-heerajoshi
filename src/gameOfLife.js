@@ -2,10 +2,9 @@ const  { createGrid, initialGrid, updateGridPosition, isCurrentGenValid, findNei
 
 const nextGeneration = function(currGeneration,bounds) {
   let { topLeft,bottomRight } = bounds;
+  let breadth = bottomRight[0] - topLeft[0] + 1;
+  let length = bottomRight[1] - topLeft[1] + 1;
 
-
-  let length = bottomRight[0] - topLeft[0] + 1;
-  let breadth = bottomRight[1] - topLeft[1] + 1;
 
   let grid = createGrid(length,breadth);
 
@@ -21,12 +20,13 @@ const nextGeneration = function(currGeneration,bounds) {
   let updatedGrid = updateGridPosition(grid);
 
   let aliveGeneration=[];
-  for(let row = 0; row < length; row++){
-    for(let column = 0; column < breadth; column++){
+  for(let row = 0; row < breadth; row++){
+    for(let column = 0; column < length; column++){
       updatedGrid[row][column] == 1 && aliveGeneration.push([row,column]);
     }
   }
   return aliveGeneration.map((x)=> [x[0] + topLeft[0], x[1] + topLeft[1]]);
+
 }
 
 

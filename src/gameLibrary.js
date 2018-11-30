@@ -1,5 +1,5 @@
 const createGrid = function(length,breadth){
-  let  cells = new Array(length).fill(breadth);
+  let  cells = new Array(breadth).fill(length);
   return cells.map( x=> new Array(x).fill(0));
 }
 
@@ -53,7 +53,7 @@ const isNeighbourAlive = function(grid){
 const isCurrentGenValid = function( bound){
   let {length, breadth} = bound;
   return function(position){
-    return   position[0] >= 0 && position[1] >= 0 && position[0] <length && position[1]  < breadth; 
+    return   position[0] >= 0 && position[1] >= 0 && position[0] <breadth && position[1]  < length; 
   }
 }
 
