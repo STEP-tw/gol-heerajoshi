@@ -29,6 +29,11 @@ describe('nextGeneration',() => {
     let actualNextGen = nextGeneration(currentGeneration,bounds);
     assert.ok(isSame(actualNextGen,expectedNextGen));
     assert.ok(isSameArity(actualNextGen,expectedNextGen));
+    currentGeneration = [[1,2],[1,3],[2,1],[1,1]];
+    expectedNextGen = [[1,1],[1,2],[2,1],[2,2]]
+    bounds = {topLeft: [0,0], bottomRight: [3,2]};
+    actualNextGen = nextGeneration(currentGeneration,bounds);
+    assert.ok(isSame(actualNextGen,expectedNextGen));
   });
 
   it('it should return the same live cells at every iteration(constant world)', function(){

@@ -1,5 +1,5 @@
 const createGrid = function(length,breadth){
-  let  cells = new Array(breadth).fill(length);
+  let  cells = new Array(length).fill(breadth);
   return cells.map( x=> new Array(x).fill(0));
 }
 
@@ -44,7 +44,7 @@ const startGame = function(inputs){
   let initializedGrid = initialGrid(grid,inputs.aliveCells);
   console.log(initializedGrid);
 }
- 
+
 const isNeighbourAlive = function(grid){
   return function(neighbour){
     return grid[neighbour[0]][neighbour[1]] == 1;
@@ -68,15 +68,15 @@ const updateGridPosition = function(gridArray){
       let validNeighbours = neighbours.filter(isValid);
       let isAlive = isNeighbourAlive(gridArray);
       let aliveNeighbours = validNeighbours.filter(isAlive).length;
-    
-     if(aliveNeighbours == 3)  
-      updatedGrid[row][column] =1;
+
+      if(aliveNeighbours == 3)  
+        updatedGrid[row][column] =1;
 
       if(aliveNeighbours <2 || aliveNeighbours >3)
         updatedGrid[row][column]=0;
     }
   }
-return updatedGrid;
+  return updatedGrid;
 }
 
 
