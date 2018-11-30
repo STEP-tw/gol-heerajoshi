@@ -3,13 +3,13 @@ const createGrid = function(length,breadth){
   return cells.map( x=> new Array(x).fill(0));
 }
 
-const makeCellAlive = function(cells,position){
-  cells[position[0]][position[1]] = 1;
-  return cells;
+const makeCellAlive = function(grid,position){
+  grid[position[0]][position[1]] = 1;
+  return grid;
 }
 
-const initialGrid = function(cells,positionsWhereToMakeAlive){
-  return positionsWhereToMakeAlive.reduce(makeCellAlive,cells);
+const initialGrid = function(grid,inputs){
+  return inputs.reduce(makeCellAlive,grid);
 }
 
 const findNeighbours = function(cell){
@@ -50,7 +50,12 @@ const isNeighbourAlive = function(grid){
     return grid[neighbour[0]][neighbour[1]] == 1;
   }
 }
-
+const isCurrentGenValid = function( bound){
+  let {length, breadth} = bound;
+  return function(position){
+    return   position[0] >= 0 && position[1] >= 0 && position[0] <length && position[1]  < breadth; 
+  }
+}
 
 const updateGridPosition = function(gridArray){
   let updatedGrid = gridArray.map(x=> x.slice());
@@ -64,8 +69,8 @@ const updateGridPosition = function(gridArray){
       let isAlive = isNeighbourAlive(gridArray);
       let aliveNeighbours = validNeighbours.filter(isAlive).length;
     
-      if(aliveNeighbours == 3)
-        updatedGrid[row][column] =1;
+     if(aliveNeighbours == 3)  
+      updatedGrid[row][column] =1;
 
       if(aliveNeighbours <2 || aliveNeighbours >3)
         updatedGrid[row][column]=0;
@@ -77,5 +82,5 @@ return updatedGrid;
 
 
 
-module.exports = { createGrid, initialGrid, findNeighbours, isValidNeighbour, isValidNeighbour, startGame , updateGridPosition};
+module.exports = { createGrid, initialGrid, findNeighbours, isValidNeighbour, isValidNeighbour,isCurrentGenValid ,startGame , updateGridPosition};
 

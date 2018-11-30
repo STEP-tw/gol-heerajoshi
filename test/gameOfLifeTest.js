@@ -30,4 +30,20 @@ describe('nextGeneration',() => {
     assert.ok(isSame(actualNextGen,expectedNextGen));
     assert.ok(isSameArity(actualNextGen,expectedNextGen));
   });
+
+  it('it should return the same live cells at every iteration(constant world)', function(){
+    let currentGeneration = [[-1,-2], [-1,-3], [-2,-1], [-2,-4], [-3,-2], [-3,-3]];
+    let expectedNextGen = [[-1,-2], [-1,-3], [-2,-1], [-2,-4], [-3,-2], [-3,-3]].reverse();
+    let bounds = {topLeft: [-10,-10], bottomRight: [4,5]}
+    let actualNextGen = nextGeneration(currentGeneration,bounds);
+    assert.deepEqual(actualNextGen, expectedNextGen);
+  });
+  it('it should return the same live cells at every iteration(constant world)', function(){
+    let currentGeneration = [[1,2], [1,3], [2,1], [2,4], [3,2], [3,3]];
+    let expectedNextGen = [[1,2], [1,3], [2,1], [2,4], [3,2], [3,3]];
+    let bounds = {topLeft: [-1,-1], bottomRight: [4,5]}
+    let actualNextGen = nextGeneration(currentGeneration,bounds);
+    assert.deepEqual(actualNextGen, expectedNextGen);
+  });
+
 });
