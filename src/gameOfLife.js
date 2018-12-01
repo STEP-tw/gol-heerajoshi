@@ -5,20 +5,16 @@ const nextGeneration = function(currGeneration,bounds) {
   let breadth = bottomRight[0] - topLeft[0] + 1;
   let length = bottomRight[1] - topLeft[1] + 1;
 
-
   let grid = createGrid(length,breadth);
-
   let newBound = {length, breadth}
 
-  filterCurrGeneration = isCurrentGenValid(newBound);
+  let filterCurrGeneration = isCurrentGenValid(newBound);
 
   currGeneration=  currGeneration.map((x)=> [x[0] - topLeft[0], x[1] - topLeft[1]]);
-
   currGeneration= currGeneration.filter( filterCurrGeneration);
 
   grid =  initialGrid(grid, currGeneration);
   let updatedGrid = updateGridPosition(grid);
-
   let aliveGeneration=[];
   for(let row = 0; row < breadth; row++){
     for(let column = 0; column < length; column++){
@@ -31,5 +27,3 @@ const nextGeneration = function(currGeneration,bounds) {
 
 
 module.exports = { nextGeneration };
-
-

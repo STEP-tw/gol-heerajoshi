@@ -19,22 +19,24 @@ const findNeighbours = function(cell){
     array.forEach((column)=>{
       neighbours.push([row+cell[0], column+cell[1]]);
     }))
-  return neighbours.filter((position)=> !(position[0]==cell[0] && position[1] == cell[1]));
+  let result = neighbours.filter((position)=> !(position[0]==cell[0] && position[1] == cell[1]));
+  return result;
 }
 
 const isValidNeighbour = function(grid){
   return function(neighbour){
-    return !doesElementExistInARange(neighbour, grid);
+    return doesElementExistInARange(neighbour, grid);
   }
 }
 
 const doesElementExistInARange = function(element, grid){
   let lowerLimit = 0;
   let upperLimit = grid.length;
+  let upperLimit2 = grid[0].length;
 
   let lowestElement = Math.min(element[0], element[1]);
   let greatestElement = Math.max(element[0], element[1]);
-  return (lowestElement < lowerLimit || greatestElement >= upperLimit);
+  return (element[0] >= 0  && element[1] >= 0 && element[0] < upperLimit && element[1] < upperLimit2);
 }
 
 
@@ -42,7 +44,6 @@ const startGame = function(inputs){
   let grid = createGrid(inputs.length,inputs.breadth);
   let gridLength = grid.length;
   let initializedGrid = initialGrid(grid,inputs.aliveCells);
-  console.log(initializedGrid);
 }
 
 const isNeighbourAlive = function(grid){
@@ -68,14 +69,16 @@ const updateGridPosition = function(gridArray){
       let validNeighbours = neighbours.filter(isValid);
       let isAlive = isNeighbourAlive(gridArray);
       let aliveNeighbours = validNeighbours.filter(isAlive).length;
-
-      if(aliveNeighbours == 3)  
+      if(aliveNeighbours == 3){  
         updatedGrid[row][column] =1;
-
-      if(aliveNeighbours <2 || aliveNeighbours >3)
+      }
+      if(aliveNeighbours <2 || aliveNeighbours >3){
         updatedGrid[row][column]=0;
+      }
     }
   }
+
+
   return updatedGrid;
 }
 
